@@ -1,28 +1,37 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
-import { ApiProperty } from '@nestjs/swagger';
-import { Usuario } from "../../usuario/entities/usuario.entity";
+import { ApiProperty } from "@nestjs/swagger";
+import { IsNotEmpty, MaxLength } from "class-validator";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Tema } from "../../tema/entities/tema.entity";
+import { Usuario } from "../../usuario/entities/usuario.entity";
 
-@Entity({})
+@Entity({ name: "tb_postagens" })
 export class Postagem {
 
-    @PrimaryGeneratedColumn() 
-    @ApiProperty()     
+    @PrimaryGeneratedColumn()
+    @ApiProperty()
     id: number
 
-    @Column({length: 30, nullable: false})
-    @ApiProperty()  
+    @IsNotEmpty()
+    @MaxLength(100)
+    @Column({ length: 100, nullable: false })
+    @ApiProperty()
     titulo: string
 
-    @Column({length: 5000, nullable: false})
-    @ApiProperty()  
+    @IsNotEmpty()
+    @Column({ length: 1000, nullable: false })
+    @ApiProperty()
     texto: string
 
-    @ManyToOne(() => Tema, (tema) => tema.postagem)
-    @ApiProperty()  
-    tema: Tema //Documentação: https://typeorm.io/many-to-one-one-to-many-relations
+    @ApiProperty({ type: () => Tema})
+    @ManyToOne(() => Tema, (tema) => tema.postagem, {
+        onDelete: "CASCADE"
+    })
+    tema: Tema
 
-    @ManyToOne(() => Usuario, (usuario) => usuario.postagem)
-    @ApiProperty()  
-    usuario: Usuario //Documentação: https://typeorm.io/many-to-one-one-to-many-relations
+
+    @ApiProperty({type: () => Usuario})
+    @ManyToOne(() => Usuario, (usuario) => usuario.postagem, {
+        onDelete: "CASCADE"
+    })
+    usuario: Usuario
 }

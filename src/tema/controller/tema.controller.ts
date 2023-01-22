@@ -1,49 +1,52 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put, UseGuards } from "@nestjs/common";
-import { Tema } from "../entities/tema.entity";
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { TemaService } from "../service/tema.service";
+import { Body, Controller, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put, UseGuards, Delete } from "@nestjs/common";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { JwtAuthGuard } from "../../auth/guard/jwt-auth.guard";
+import { Tema } from "../entities/tema.entity";
+import { TemaService } from "../service/tema.service";
 
-@ApiBearerAuth()
 @ApiTags('Tema')
-@Controller("/tema")
 @UseGuards(JwtAuthGuard)
-export class TemaController {
-  constructor(private readonly service: TemaService) { }
+@Controller('/tema')
+@ApiBearerAuth()
+export class TemaCrontoller{
+    constructor(private readonly temaService: TemaService){}
 
-  @Get()
-  @HttpCode(HttpStatus.OK)
-  findAll(): Promise<Tema[]> {
-    return this.service.findAll();
-  }
+    @Get()
+        @HttpCode(HttpStatus.OK)
+             findAll(): Promise<Tema[]> {
+                return this.temaService.findAll()
+    }
 
-  @Get('/:id')
-  @HttpCode(HttpStatus.OK)
-  findById(@Param('id') id: number): Promise<Tema> {
-    return this.service.findOneById(id);
-  }
+    @Get('/:id')
+        @HttpCode(HttpStatus.OK)
+            findById(@Param('id', ParseIntPipe) id: number): Promise<Tema> {
+                return this.temaService.findById(id)
+    }
 
-  @Get('/descricao/:descricao')
-  @HttpCode(HttpStatus.OK)
-  findByTitulo(@Param('descricao') descricao: string): Promise<Tema[]> {
-    return this.service.findOneByDescricao(descricao);
-  }
+    @Get('/assunto/:assunto')
+        @HttpCode(HttpStatus.OK)
+            findByAssunto(@Param('assunto') assunto:string): Promise<Tema[]>{
+                return this.temaService.findByAssunto(assunto)
+    }
 
-  @Post()
-  @HttpCode(HttpStatus.CREATED)
-  post(@Body() tema: Tema): Promise<Tema> {
-    return this.service.create(tema);
-  }
+    @Post()
+        @HttpCode(HttpStatus.CREATED)
+            create(@Body() tema: Tema): Promise<Tema>{
+                return this.temaService.create(tema)
+    }
 
-  @Put()
-  @HttpCode(HttpStatus.OK)
-  put(@Body() tema: Tema): Promise<Tema> {
-    return this.service.update(tema);
-  }
+    @Put()
+        @HttpCode(HttpStatus.OK)
+            update(@Body() tema: Tema): Promise<Tema>{
+                return this.temaService.update(tema)
+    }
+    
+    
+    @Delete('/:id')
+        @HttpCode(HttpStatus.NO_CONTENT)
+            delete(@Param('id', ParseIntPipe) id: number){
+                return this.temaService.delete(id)
+    }
 
-  @Delete('/:id')
-  @HttpCode(HttpStatus.NO_CONTENT)
-  delete(@Param('id') id: number) {
-    this.service.remove(id);
-  }
 }
+

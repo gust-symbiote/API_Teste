@@ -1,50 +1,56 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpException, HttpStatus, Param, Post, Put, UseGuards} from "@nestjs/common";
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseGuards,} from "@nestjs/common";
+import { HttpStatus } from "@nestjs/common/enums";
+import { ParseIntPipe } from "@nestjs/common/pipes";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger/dist";
 import { JwtAuthGuard } from "../../auth/guard/jwt-auth.guard";
 import { Postagem } from "../entities/postagem.entity";
 import { PostagemService } from "../service/postagem.service";
 
-
-@ApiBearerAuth()
 @ApiTags('Postagem')
-@Controller("/postagens")
 @UseGuards(JwtAuthGuard)
+@Controller('/postagens')
+@ApiBearerAuth()
 export class PostagemController {
-  constructor(private readonly service: PostagemService) { }
+    constructor(private readonly PostagemService: PostagemService) { }
 
-  @Get()
-  @HttpCode(HttpStatus.OK)
-  findAll(): Promise<Postagem[]> {
-    return this.service.findAll();
-  }
+    @Get()
+    @HttpCode(HttpStatus.OK)
+    findAll(): Promise<Postagem[]> {
+        return this.PostagemService.findAll();
+    }
 
-  @Get('/:id')
-  @HttpCode(HttpStatus.OK)
-  findById(@Param('id') id: number): Promise<Postagem> {
-    return this.service.findOneById(id);
-  }
 
-  @Get('/titulo/:titulo')
-  @HttpCode(HttpStatus.OK)
-  findByTitulo(@Param('titulo') titulo: string): Promise<Postagem[]> {
-    return this.service.findOneByTitulo(titulo);
-  }
+    @Get('/:id')
+    @HttpCode(HttpStatus.OK)
+    findById(@Param('id', ParseIntPipe) id: number): Promise<Postagem> {
+        return this.PostagemService.findById(id)
+    }
 
-  @Post()
-  @HttpCode(HttpStatus.CREATED)
-  post(@Body() post: Postagem): Promise<Postagem> {
-    return this.service.create(post);
-  }
+    @Get('/titulo/:titulo')
+    @HttpCode(HttpStatus.OK)
+    findByTitulo(@Param('titulo') titulo: string): Promise<Postagem[]> {
+        return this.PostagemService.findByTitulo(titulo)
+    }
 
-  @Put()
-  @HttpCode(HttpStatus.OK)
-  put(@Body() post: Postagem): Promise<Postagem> {
-    return this.service.update(post);
-  }
 
-  @Delete('/:id')
-  @HttpCode(HttpStatus.NO_CONTENT)
-  delete(@Param('id') id: number) {
-    this.service.remove(id);
-  }
+    @Post()
+    @HttpCode(HttpStatus.CREATED)
+    create(@Body() postagem: Postagem): Promise<Postagem>{
+        return this.PostagemService.create(postagem)
+    }
+
+
+
+    @Put()
+    @HttpCode(HttpStatus.OK)
+    update(@Body() postagem: Postagem): Promise<Postagem>{
+        return this.PostagemService.update(postagem)
+    }
+
+
+    @Delete('/:id')
+    @HttpCode(HttpStatus.NO_CONTENT)
+    delete(@Param('id', ParseIntPipe) id: number){
+        return this.PostagemService.delete(id)
+    }
 }

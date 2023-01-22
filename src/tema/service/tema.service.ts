@@ -46,15 +46,17 @@ async findByDescricao(descricao: string): Promise<Tema[]> {
  
 }
 
-//Get temaPrincipal
 async findByAssunto(assunto:string): Promise<Tema[]>{
     return await this.temaRepository.find({
         where: {
             assunto: ILike(`%${assunto}%`)
-    }
-})
+    },
+     relations: {
+         postagem: true
+     }
+  })
+ 
 }
-
 
  
 async create(tema: Tema): Promise<Tema> {

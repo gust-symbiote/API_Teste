@@ -27,11 +27,4 @@ export class Postagem {
         onDelete: "CASCADE"
     })
     tema: Tema
-
-
-    @ApiProperty({type: () => Usuario})
-    @OneToMany(() => Usuario, (usuario) => usuario.postagem, {
-        onDelete: "CASCADE"
-    })
-    usuario: Usuario
 }

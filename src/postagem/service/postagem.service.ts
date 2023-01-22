@@ -6,7 +6,7 @@ import { DeleteResult, ILike, Repository } from "typeorm";
 import { Postagem } from "../entities/postagem.entity";
 
 @Injectable()
-export class PostagemService { 
+export class PostagemService {
 
     constructor(
         @InjectRepository(Postagem)
@@ -17,7 +17,7 @@ export class PostagemService {
         return await this.PostagemRepository.find({
             relations: {
                 tema: true,
-                usuario: true 
+                usuario: true
             }
         })
     }
@@ -33,7 +33,7 @@ export class PostagemService {
                 tema: true,
                 usuario: true
             }
-        })  
+        })
 
         if (!postagem)
             throw new HttpException('Postagem não existe', HttpStatus.NOT_FOUND)

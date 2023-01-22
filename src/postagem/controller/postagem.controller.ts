@@ -1,14 +1,12 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Post, Put, UseGuards,} from "@nestjs/common";
-import { HttpStatus } from "@nestjs/common/enums";
-import { ParseIntPipe } from "@nestjs/common/pipes";
-import { ApiBearerAuth, ApiTags } from "@nestjs/swagger/dist";
-import { JwtAuthGuard } from "../../auth/guard/jwt-auth.guard";
+import { JwtAuthGuard } from './../../auth/guard/jwt-auth.guard';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put, UseGuards } from "@nestjs/common";
 import { Postagem } from "../entities/postagem.entity";
 import { PostagemService } from "../service/postagem.service";
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Postagem')
 @UseGuards(JwtAuthGuard)
-@Controller('/postagens')
+@Controller("/postagens")
 @ApiBearerAuth()
 export class PostagemController {
     constructor(private readonly PostagemService: PostagemService) { }
@@ -19,8 +17,7 @@ export class PostagemController {
         return this.PostagemService.findAll();
     }
 
-
-    @Get('/:id')
+    @Get("/:id")
     @HttpCode(HttpStatus.OK)
     findById(@Param('id', ParseIntPipe) id: number): Promise<Postagem> {
         return this.PostagemService.findById(id)
@@ -35,22 +32,21 @@ export class PostagemController {
 
     @Post()
     @HttpCode(HttpStatus.CREATED)
-    create(@Body() postagem: Postagem): Promise<Postagem>{
+    create(@Body() postagem: Postagem): Promise<Postagem> {
         return this.PostagemService.create(postagem)
     }
 
 
-
     @Put()
     @HttpCode(HttpStatus.OK)
-    update(@Body() postagem: Postagem): Promise<Postagem>{
+    update(@Body() postagem: Postagem): Promise<Postagem> {
         return this.PostagemService.update(postagem)
     }
 
 
     @Delete('/:id')
     @HttpCode(HttpStatus.NO_CONTENT)
-    delete(@Param('id', ParseIntPipe) id: number){
+    delete(@Param('id', ParseIntPipe) id: number) {
         return this.PostagemService.delete(id)
     }
 }

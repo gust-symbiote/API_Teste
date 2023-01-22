@@ -1,7 +1,7 @@
-import { Tema } from "src/Tema/entities/tema.entity"
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
 import { ApiProperty } from '@nestjs/swagger';
 import { Usuario } from "../../usuario/entities/usuario.entity";
+import { Tema } from "../../tema/entities/tema.entity";
 
 @Entity({})
 export class Postagem {

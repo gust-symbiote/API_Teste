@@ -1,6 +1,6 @@
-import { Postagem } from "src/Postagem/entities/postagem.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { ApiProperty } from '@nestjs/swagger';
+import { Postagem } from "../../postagem/entities/postagem.entity";
 
 @Entity()
 export class Tema {

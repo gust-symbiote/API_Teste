@@ -1,21 +1,19 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { IsNotEmpty } from "class-validator";
+import { Postagem } from "src/Postagem/entities/postagem.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Postagem } from "../../postagem/entities/postagem.entity";
+import { ApiProperty } from '@nestjs/swagger';
 
-@Entity({name: "tb_temas"})
+@Entity()
 export class Tema {
 
     @PrimaryGeneratedColumn()
-    @ApiProperty()
+    @ApiProperty()    
     id: number
 
-    @IsNotEmpty()
-    @Column({length: 255, nullable:false})
-    @ApiProperty()
-    descricao: string 
+    @Column({length: 30, nullable: false})
+    @ApiProperty()  
+    descricao: string
 
-    @ApiProperty({type: () => Postagem})
     @OneToMany(() => Postagem, (postagem) => postagem.tema)
-    postagem: Postagem[]
+    @ApiProperty()  
+    postagem: Postagem[]  //Documentação: https://typeorm.io/many-to-one-one-to-many-relations
 }

@@ -27,7 +27,6 @@ import{Entity, PrimaryGeneratedColumn, Column, UpdateDateColumn, ManyToOne, OneT
         @ManyToOne(() => Tema, (tema) => tema.postagem, {
             onDelete: "CASCADE"
         })
-        @JoinColumn({})
         tema: Tema
 
 
@@ -35,7 +34,6 @@ import{Entity, PrimaryGeneratedColumn, Column, UpdateDateColumn, ManyToOne, OneT
         @OneToMany(() => Usuario, (usuario) => usuario.postagem, {
             onDelete: "CASCADE"
         })
-        @JoinColumn({})
         usuario: Usuario
     }
 

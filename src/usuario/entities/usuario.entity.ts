@@ -30,8 +30,5 @@ import { Postagem } from "../../postagem/entities/postagem.entity";
         @Column({length: 5000})
         @ApiProperty()
         foto: string
-
-        @ApiProperty({ type: () => Postagem})
-        @ManyToOne( () => Postagem, (postagem) => postagem.usuario)
-        postagem: Postagem[]
+        
 }

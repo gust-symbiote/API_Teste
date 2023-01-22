@@ -35,6 +35,7 @@ import{Entity, PrimaryGeneratedColumn, Column, UpdateDateColumn, ManyToOne, Join
         @ManyToOne(() => Usuario, (usuario) => usuario.postagem, {
             onDelete: "CASCADE"
         })
+        @JoinColumn({})
         usuario: Usuario
     }
 

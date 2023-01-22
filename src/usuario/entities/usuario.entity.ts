@@ -33,6 +33,5 @@ import { Postagem } from "../../postagem/entities/postagem.entity";
 
         @ApiProperty({ type: () => Postagem})
         @OneToMany( () => Postagem, (postagem) => postagem.usuario)
-        @JoinColumn({})
         postagem: Postagem[]
 }

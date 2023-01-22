@@ -22,7 +22,6 @@ export class Tema {
 
     @ApiProperty({ type: () => Postagem })
     @OneToMany(() => Postagem, (postagem) => postagem.tema)
-    @JoinColumn({})
     postagem: Postagem  
 
 }

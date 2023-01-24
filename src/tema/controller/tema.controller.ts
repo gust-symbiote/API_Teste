@@ -55,3 +55,4 @@ export class TemaController {
         return this.TemaService.delete(id)
     }
 }
+

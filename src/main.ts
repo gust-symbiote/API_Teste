@@ -11,7 +11,7 @@ async function bootstrap() {
     .setTitle('Fórum Lady Debug')
     .setDescription('Projeto do Fórum Lady Debug')
     .setContact('Equipe 3 - Generation', 'http://github.com/Equipe03-Generation', 'forumdevgirls@gmail.com')
-    .setVersion('2.0')
+    .setVersion('3.0')
     .addBearerAuth()
     .build()
     const document = SwaggerModule.createDocument(app, config)

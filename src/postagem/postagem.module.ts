@@ -4,10 +4,11 @@ import { PostagemController } from "./controller/postagem.controller";
 import { Postagem } from "./entities/postagem.entity";
 import { PostagemService } from "./service/postagem.service";
 
+
 @Module({
     imports: [TypeOrmModule.forFeature([Postagem])],
     providers: [PostagemService],
     controllers: [PostagemController],
-    exports: [TypeOrmModule]
+    exports: [TypeOrmModule],
 })
-export class PostagemModule { }
+    export class PostagemModule {}

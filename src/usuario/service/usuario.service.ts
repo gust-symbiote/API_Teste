@@ -19,6 +19,14 @@ export class UsuarioService {
             }
         })
     }
+    
+    async findByNome(nome: string): Promise<Usuario | undefined> {
+        return await this.usuarioRepository.findOne({
+            where: {
+                nome: nome
+            }
+        })
+    }
 
     async findAll(): Promise<Usuario[]> {
         return await this.usuarioRepository.find({

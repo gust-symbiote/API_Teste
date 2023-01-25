@@ -24,6 +24,12 @@ export class UsuarioController {
         return this.usuarioService.findById(id)
     }
     
+    @HttpCode(HttpStatus.OK)
+    @Get("/:nome")
+    findByNome(@Param('id', ParseIntPipe) nome: string): Promise<Usuario> {
+        return this.usuarioService.findByNome(nome)
+    }
+    
     @HttpCode(HttpStatus.CREATED)
     @Post('/cadastrar')
     async create(@Body() usuario: Usuario): Promise<Usuario> {

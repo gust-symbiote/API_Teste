@@ -20,7 +20,10 @@ export class Tema {
     @ApiProperty()
     descricao: string
 
-    @ApiProperty({type: () => Postagem})
+    @ApiProperty({ type: () => Postagem })
     @OneToMany(() => Postagem, (postagem) => postagem.tema)
-    postagem: Postagem[]
+    postagem: Postagem
+
+
+    
 }

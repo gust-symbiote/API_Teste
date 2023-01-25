@@ -32,7 +32,7 @@ import{Entity, PrimaryGeneratedColumn, Column, UpdateDateColumn, ManyToOne, OneT
 
 
         @ApiProperty({ type: () => Usuario})
-        @OneToMany(() => Usuario, (usuario) => usuario.postagem, {
+        @ManyToOne(() => Usuario, (usuario) => usuario.postagem, {
             onDelete: "CASCADE"
         })
         usuario: Usuario

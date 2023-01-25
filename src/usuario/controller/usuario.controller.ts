@@ -12,7 +12,7 @@ export class UsuarioController {
     constructor(private readonly usuarioService: UsuarioService) {}
 
     @UseGuards(JwtAuthGuard)
-    @Get('/all')
+    @Get('')
     @HttpCode(HttpStatus.OK)
     findAll(): Promise<Usuario[]> {
         return this.usuarioService.findAll();

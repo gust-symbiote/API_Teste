@@ -26,7 +26,7 @@ export class UsuarioController {
     
     @HttpCode(HttpStatus.OK)
     @Get("/:nome")
-    findByNome(@Param('id', ParseIntPipe) nome: string): Promise<Usuario> {
+    findByNome(@Param('nome') nome: string): Promise<Usuario> {
         return this.usuarioService.findByNome(nome)
     }
     

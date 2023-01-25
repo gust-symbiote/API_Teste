@@ -18,6 +18,12 @@ export class UsuarioController {
         return this.usuarioService.findAll();
     }
     
+    @HttpCode(HttpStatus.OK)
+    @Get("/:id")
+    findById(@Param('id', ParseIntPipe) id: number): Promise<Usuario> {
+        return this.usuarioService.findById(id)
+    }
+    
     @HttpCode(HttpStatus.CREATED)
     @Post('/cadastrar')
     async create(@Body() usuario: Usuario): Promise<Usuario> {
@@ -26,7 +32,7 @@ export class UsuarioController {
 
     @UseGuards(JwtAuthGuard)
     @HttpCode(HttpStatus.OK)
-    @Put('atualizar')
+    @Put('/atualizar')
     async update (@Body() usuario: Usuario): Promise<Usuario> {
         return this.usuarioService.update(usuario)
     }

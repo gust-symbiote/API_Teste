@@ -30,7 +30,9 @@ export class Usuario {
     @ApiProperty()
     foto: string
 
-    @ApiProperty({ type: () => Postagem })
-    @ManyToOne(() => Postagem, (postagem) => postagem.usuario)
+    @ApiProperty({ type: () => Postagem})
+    @OneToMany(() => Postagem, (postagem) => postagem.usuario)
     postagem: Postagem[]
+
+
 }

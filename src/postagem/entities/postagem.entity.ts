@@ -25,19 +25,18 @@ import{Entity, PrimaryGeneratedColumn, Column, UpdateDateColumn, ManyToOne, OneT
 
         @ApiProperty({ type: () => Tema})
         @ManyToOne(() => Tema, (tema) => tema.postagem, {
-            onDelete: "CASCADE"
+        onDelete: "CASCADE"
         })
-        @JoinColumn({})
         tema: Tema
 
 
-        @ApiProperty({ type: () => Usuario})
+        @ApiProperty({type: () => Usuario})
         @ManyToOne(() => Usuario, (usuario) => usuario.postagem, {
-            onDelete: "CASCADE"
+        onDelete: "CASCADE"
         })
         usuario: Usuario
-    }
 
+    }
     
 
     
